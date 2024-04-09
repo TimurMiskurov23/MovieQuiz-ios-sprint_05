@@ -9,8 +9,6 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     
-   
-    
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     
@@ -27,8 +25,6 @@ final class MovieQuizViewController: UIViewController {
             let viewModel = convert(model: firstQuestion)
             show(quiz: viewModel)
         }
-
- 
     }
     private func show(quiz step: QuizStepViewModel) {
         imageView.layer.borderColor = UIColor.clear.cgColor
@@ -101,7 +97,6 @@ final class MovieQuizViewController: UIViewController {
         }
     }
    
-
     @IBAction private func noButtonClicked(_ sender: Any) {
         guard let currentQuestion = currentQuestion else {
             return
