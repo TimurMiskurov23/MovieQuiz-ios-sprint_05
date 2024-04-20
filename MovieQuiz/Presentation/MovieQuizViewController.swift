@@ -15,7 +15,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private let questionAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol = QuestionFactory()
     private var currentQuestion: QuizQuestion?
-
+    private let alertPresenter = AlertPresenter()
+    
+    
     // Mark: - QuestionFactoryDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,10 +84,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func showResults(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
-            title: result.title,
-            message: result.text,
-            preferredStyle: .alert)
+        let alert = AlertPresenter()
+        
         
         let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
             guard let self = self else { return }
@@ -93,10 +93,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self.correctAnswers = 0
             questionFactory.requestNextQuestion()
         }
-        
-        alert.addAction(action)
-        self.present(alert, animated: true)
-        }
+    }
 
     private func needEnabledButtons(isEnabled: Bool) {
         yesButton.isEnabled = isEnabled
@@ -117,7 +114,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let givenAnswer = true
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.coorectAnswer)
     }
-
 }
 
 
